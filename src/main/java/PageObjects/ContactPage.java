@@ -1,6 +1,5 @@
 package PageObjects;
 
-
 import core.GeneralHelper;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
@@ -13,7 +12,6 @@ public class ContactPage extends GeneralHelper {
         return contactpage;
     }
 
-
     public void checkBusinessIsChecked(){
         List<WebElement> radioButton = driver.findElements(By.name("your-customer-type"));
         for (WebElement e: radioButton) {
@@ -22,6 +20,7 @@ public class ContactPage extends GeneralHelper {
             }
         }
     }
+    
     public void checkPrivateIsNotChecked(){
         List<WebElement> radioButton = driver.findElements(By.name("your-customer-type"));
         for (WebElement e: radioButton) {
