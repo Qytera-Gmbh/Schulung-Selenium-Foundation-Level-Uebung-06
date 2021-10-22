@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 public class FirstTestCase extends GeneralHelper {
 
-
     @Test
     @Tag("MyFirstTest")
     public void firstTestCase(){
@@ -17,12 +16,9 @@ public class FirstTestCase extends GeneralHelper {
         contactPage.checkPrivateIsNotChecked();
     }
 
-
     @Test
     @Tag("MySecondTestcase")
     public void secondTestCase(){
         System.out.println("SecondTest");
     }
-
-
 }
