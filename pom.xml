@@ -26,7 +26,6 @@
             <artifactId>selenium-java</artifactId>
             <version>4.0.0</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
