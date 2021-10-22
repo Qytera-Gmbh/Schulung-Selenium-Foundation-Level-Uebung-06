@@ -16,5 +16,4 @@ public class GeneralPage extends GeneralHelper {
     public void clickOnElementWithId(String id){
         driver.findElement(By.id(id)).click();
     }
-
 }
