@@ -62,7 +62,9 @@ public class GeneralHelper {
 
     @AfterEach
     public void tearDown(){
-        driver.quit();
-        driver=null;
+        if(driver!=null){
+            driver.quit();
+            driver=null;
+        }
     }
 }
