@@ -3,11 +3,15 @@ package core;
 import PageObjects.ContactPage;
 import PageObjects.GeneralPage;
 import PageObjects.StartPage;
+import com.google.common.base.Strings;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GeneralHelper {
     public static WebDriver driver;
@@ -20,43 +24,34 @@ public class GeneralHelper {
     public GeneralPage generalPage = GeneralPage.getInstance();
 
     public static WebDriver getDriver(){
-        var lxResourcePath = "src/test/resources/chromedriver";
+        List<String> lxResourcePath = new ArrayList<>();
+        lxResourcePath.add("src/test/resources/");
         var operatingSystem = System.getProperty("os.name").toLowerCase();
+        var browserConfig = System.getProperty("SELENIUM_BROWSER_CONFIG");
 
-        if(driver==null) {
-            if(System.getenv("SELENIUM_BROWSER_CONFIG") != null){
-                if(System.getenv("SELENIUM_BROWSER_CONFIG").equalsIgnoreCase("chrome") && operatingSystem.contains("windows")) {
-                    System.setProperty("webdriver.chrome.driver", lxResourcePath +".exe");
-                    return new ChromeDriver();
-                }
-                if(System.getenv("SELENIUM_BROWSER_CONFIG").equalsIgnoreCase("chrome") && operatingSystem.contains("linux")) {
-                    System.setProperty("webdriver.chrome.driver", lxResourcePath);
-                    return new ChromeDriver();
-                }
-                if(System.getenv("SELENIUM_BROWSER_CONFIG").equalsIgnoreCase("firefox") && operatingSystem.contains("windows")) {
-                    System.setProperty("webdriver.gecko.driver", lxResourcePath.replace("chrome","gecko") + ".exe");
-                    return new FirefoxDriver();
-                }
-                if(System.getenv("SELENIUM_BROWSER_CONFIG").equalsIgnoreCase("firefox") && operatingSystem.contains("linux")) {
-                    System.setProperty("webdriver.gecko.driver", lxResourcePath.replace("chrome","gecko"));
-                    return new FirefoxDriver();
-                }
-                else{
-                    //Default
-                    System.setProperty("webdriver.chrome.driver", lxResourcePath + ".exe");
-                    return new ChromeDriver();
-                }
-            }
-            else {
-                //Default
-                System.setProperty("webdriver.chrome.driver", lxResourcePath);
-                return new ChromeDriver();
-            }
-        }
-        else{
+        if (driver != null) {
             return driver;
         }
+
+        if (operatingSystem.contains("windows")) {
+            lxResourcePath.add(".exe");
+        }
+
+        if (Strings.isNullOrEmpty(browserConfig) || browserConfig.equalsIgnoreCase("chrome")) {
+            lxResourcePath.add(1,"chromedriver");
+            System.setProperty("webdriver.chrome.driver", String.join("", lxResourcePath));
+            return new ChromeDriver();
+        }
+
+        if (browserConfig.equalsIgnoreCase("firefox")) {
+            lxResourcePath.add(1, "geckodriver");
+            System.setProperty("webdriver.gecko.driver", String.join("", lxResourcePath));
+            return new FirefoxDriver();
+        }
+        //Default
+        throw new RuntimeException("Program cannot execute on this system and browser configuration.");
     }
+
     @BeforeEach
     public void browserOptions(){
         if(driver==null){
