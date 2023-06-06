@@ -30,5 +30,16 @@ public class FirstTestCase {
         System.out.println("SecondTest");
     }
 
+    @BeforeEach
+    public void browserOptions(){
+        driver.manage().window().maximize();
+    }
 
+    @AfterEach
+    public void tearDown() {
+        if(driver!=null){
+            driver.quit();
+            driver=null;
+        }
+    }
 }

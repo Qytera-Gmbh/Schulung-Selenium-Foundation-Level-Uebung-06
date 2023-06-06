@@ -1,8 +1,6 @@
 package PageObjects;
 
 import core.SingletonBrowserClass;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,16 +29,5 @@ public class GeneralPage    {
         return e;
     }
 
-    @BeforeEach
-    public void browserOptions(){
-        driver.manage().window().maximize();
-    }
 
-    @AfterEach
-    public void tearDown(){
-        if(driver!=null){
-            driver.quit();
-            driver=null;
-        }
-    }
 }
