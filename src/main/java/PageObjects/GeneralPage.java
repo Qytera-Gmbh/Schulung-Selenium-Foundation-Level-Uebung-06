@@ -1,19 +1,22 @@
 package PageObjects;
 
-import core.GeneralHelper;
+import core.SingletonBrowserClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class GeneralPage extends GeneralHelper {
-    public static final GeneralPage generalPage = new GeneralPage();
-    public static GeneralPage getInstance(){
-        return generalPage;
-    }
+public class GeneralPage    {
 
+    public static final GeneralPage generalPage = new GeneralPage();
+
+    SingletonBrowserClass singletonBrowserClass = SingletonBrowserClass.getInstanceOfSingletonBrowserClass();
+    WebDriver driver = singletonBrowserClass.getDriver();
     public void doOpenBrowserWithLink(String url){
         driver.get(url);
     }
@@ -26,5 +29,18 @@ public class GeneralPage extends GeneralHelper {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(duration));
         wait.until(ExpectedConditions.elementToBeClickable(e));
         return e;
+    }
+
+    @BeforeEach
+    public void browserOptions(){
+        driver.manage().window().maximize();
+    }
+
+    @AfterEach
+    public void tearDown(){
+        if(driver!=null){
+            driver.quit();
+            driver=null;
+        }
     }
 }

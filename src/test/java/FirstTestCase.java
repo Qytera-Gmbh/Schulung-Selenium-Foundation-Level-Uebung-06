@@ -1,8 +1,16 @@
-import core.GeneralHelper;
+import core.SingletonBrowserClass;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-public class FirstTestCase extends GeneralHelper {
+import static PageObjects.GeneralPage.generalPage;
+import static PageObjects.StartPage.startPage;
+import static PageObjects.ContactPage.contactPage;
+
+public class FirstTestCase {
+
+    SingletonBrowserClass singletonBrowserClass = SingletonBrowserClass.getInstanceOfSingletonBrowserClass();
+    WebDriver driver = singletonBrowserClass.getDriver();
 
     @Test
     @Tag("MyFirstTest")
@@ -21,4 +29,6 @@ public class FirstTestCase extends GeneralHelper {
     public void secondTestCase(){
         System.out.println("SecondTest");
     }
+
+
 }
