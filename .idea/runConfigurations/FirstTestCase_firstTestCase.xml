@@ -5,7 +5,6 @@
     <option name="MAIN_CLASS_NAME" value="FirstTestCase" />
     <option name="METHOD_NAME" value="firstTestCase" />
     <option name="TEST_OBJECT" value="method" />
-    <option name="VM_PARAMETERS" value="-ea -DSELENIUM_BROWSER_CONFIG=chrome" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

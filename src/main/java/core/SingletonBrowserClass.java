@@ -19,7 +19,7 @@ public class SingletonBrowserClass {
         List<String> lxResourcePath = new ArrayList<>();
         lxResourcePath.add("src/test/resources/");
         var operatingSystem = System.getProperty("os.name").toLowerCase();
-        var browserConfig = System.getProperty("SELENIUM_BROWSER_CONFIG2","chrome");
+        var browserConfig = System.getProperty("SELENIUM_BROWSER_CONFIG","chrome");
         if (operatingSystem.contains("windows")) {
             lxResourcePath.add(".exe");
         }
